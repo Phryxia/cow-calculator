@@ -101,7 +101,7 @@ export default class Price {
   private renderFetus(cow: Cow): string {
     const priceCuffF = this.getAveragePrice('price-calf-f-4~5month');
     const priceCuffM = this.getAveragePrice('price-calf-m-4~5month');
-    const priceCuffA = Math.round((priceCuffF + priceCuffM) / 2);
+    const priceCuffA = Math.floor((priceCuffF + priceCuffM) / 2);
     let marker = 1;
     
     // 1
@@ -111,7 +111,7 @@ export default class Price {
     ++marker;
 
     // 2
-    const secondValue = Math.round(priceCuffA * cow.pregnant / 14.5);
+    const secondValue = Math.floor(priceCuffA * cow.pregnant / 14.5);
 
     out += `${Util.getMarker(marker)} 유사산 발생 당시 임신 개월수 (${cow.pregnant}개월)\n`;
     out += `  ${Util.getMarker(marker - 1)} × ${cow.pregnant} ÷ 14.5 = ${Util.format(secondValue)}\n`;
@@ -196,7 +196,7 @@ export default class Price {
       // 송아지 4-5개월령의 암,수 평균가격
       const priceCuffF = this.getAveragePrice('price-calf-f-4~5month');
       const priceCuffM = this.getAveragePrice('price-calf-m-4~5month');
-      const priceCuffA = Math.round((priceCuffF + priceCuffM) / 2);
+      const priceCuffA = Math.floor((priceCuffF + priceCuffM) / 2);
       const parentMarker = marker - 1;
 
       out += `${Util.getMarker(marker)} 송아지 4-5개월령의 암,수 평균가격\n`;
@@ -205,7 +205,7 @@ export default class Price {
       ++marker;
 
       // 유사산 발생 당시 임신 개월수
-      const secondValue = Math.round(priceCuffA * cow.pregnant / 14.5);
+      const secondValue = Math.floor(priceCuffA * cow.pregnant / 14.5);
       const childMarker = marker;
 
       out += `${Util.getMarker(marker)} 유사산 발생 당시 임신 개월수 (${cow.pregnant}개월)\n`;
@@ -235,7 +235,7 @@ export default class Price {
    */
   private renderCuff3Base(value: number, marker: number, cow: Cow): [string, number, number] {
     let out = '';
-    const nextValue = Math.round((cow.age + 10) / 14.5 * value);
+    const nextValue = Math.floor((cow.age + 10) / 14.5 * value);
 
     out += `${Util.getMarker(marker)} 송아지${cow.age}개월 (3개월이하)\n`;
     out += `  = (${cow.age} + 10) ÷ 14.5 × ${Util.format(value)} = ${Util.format(nextValue)}\n`;
@@ -266,7 +266,7 @@ export default class Price {
    */
   private renderCastration(value: number, marker: number): [string, number, number] {
     let out = '';
-    const nextValue = Math.round(value * 1.2);
+    const nextValue = Math.floor(value * 1.2);
 
     out += `${Util.getMarker(marker)} 거세우\n`;
     out += `  ${Util.getMarker(marker - 1)} × 1.2 = ${Util.format(nextValue)}\n`;
@@ -290,7 +290,7 @@ export default class Price {
     if (desease !== 'tuberculosis') {
       const label = desease === 'brucella' ? '소 브루셀라병 양성우' : '소 구제역 백신 접종으로 인한 폐사';
       const discount = this.getDiscountRate(desease as any);
-      nextValue = Math.round(value * discount / 100);
+      nextValue = Math.floor(value * discount / 100);
       
       out += `${Util.getMarker(marker)} ${label}\n`;
       out += `  ${Util.getMarker(marker - 1)} × ${discount} ÷ 100 = ${Util.format(nextValue)}\n`;
@@ -326,7 +326,7 @@ export default class Price {
     if (desease !== 'tuberculosis') {
       const label = desease === 'brucella' ? '소 브루셀라병 양성우' : '소 구제역 백신 접종으로 인한 폐사';
       const discount = this.getDiscountRate(desease as any);
-      nextValue = Math.round((valueParent + valueChild) * discount / 100);
+      nextValue = Math.floor((valueParent + valueChild) * discount / 100);
       
       out += `${Util.getMarker(marker)} ${label}\n`;
       out += `  ( ${Util.getMarker(markerParent)} + ${Util.getMarker(markerChild)} ) × ${discount} ÷ 100 = ${Util.format(nextValue)}\n`;
@@ -352,7 +352,7 @@ export default class Price {
     const baseValue = cow.sex === '암' ? this.getAveragePrice('price-calf-f-6~7month') : this.getAveragePrice('price-calf-m-6~7month');
     const tempValue = cow.sex === '암' ? this.getAveragePrice('price-cow-f') : this.getAveragePrice('price-cow-m');
     const stdWeight = this.getStandardWeight(cow.sex);
-    const nextValue = Math.round(baseValue + (cow.weight - stdWeight) * (tempValue - baseValue) / (600 - stdWeight));
+    const nextValue = Math.floor(baseValue + (cow.weight - stdWeight) * (tempValue - baseValue) / (600 - stdWeight));
 
     out += `${Util.getMarker(marker)} 한우 ${cow.weight}kg (600kg 이하)\n`;
     out += `  = ${Util.format(baseValue)} + [(${cow.weight} - ${stdWeight}) × (${Util.format(tempValue)} - ${Util.format(baseValue)}) ÷ (600 - ${stdWeight})]\n`;
@@ -372,7 +372,7 @@ export default class Price {
 
     const baseValue = cow.sex === '암' ? this.getAveragePrice('price-calf-f-6~7month') : this.getAveragePrice('price-calf-m-6~7month');
     const stdWeight = 600;
-    const nextValue = Math.round(baseValue + ((cow.weight - stdWeight) * baseValue / stdWeight));
+    const nextValue = Math.floor(baseValue + ((cow.weight - stdWeight) * baseValue / stdWeight));
 
     out += `${Util.getMarker(marker)} 한우 ${cow.weight}kg (${stdWeight}kg 초과)\n`;
     out += `  = ${Util.format(baseValue)} + [(${cow.weight} - ${stdWeight}) × ${Util.format(baseValue)} ÷ ${stdWeight}]\n`;
@@ -396,7 +396,7 @@ export default class Price {
       120개월령 이상은  평가상한가격의 40% 적용
     */
     const discount = Math.max(100 - Math.max(cow.age - 60, 0), 40);
-    const nextValue = Math.round(value * discount / 100);
+    const nextValue = Math.floor(value * discount / 100);
 
     out += `${Util.getMarker(marker)} 월령에 따른 평가액 상한선 조정 (${cow.age}개월령)\n`;
     out += `  ${Util.getMarker(marker - 1)} × ${discount}% = ${Util.format(nextValue)}\n`;
