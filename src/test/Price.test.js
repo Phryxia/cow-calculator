@@ -1,95 +1,166 @@
 import Cow from '../Cow';
 import Price from '../Price';
 
-// 유사산태아
-const cow1 = new Cow({
-  name: "소1",
-  type: "한우",
-  id: "1184 8871 2",
-  sex: "-",
-  age: "-",
-  weight: "-",
-  pregnant: "임신2개월"
-});
+/*
+  이 테스트는 2020-6-5을 기준으로 작성된 테스트 케이스입니다.
+*/
 
-// 평범한 한우
-const cow2 = new Cow({
-  name: "소2",
-  type: "한우",
-  id: "1184 8871 2",
-  sex: "암",
-  age: "27개월",
-  weight: "550kg",
-  pregnant: ""
-});
-
-// 거세우
-const cow3 = new Cow({
-  name: "소3",
-  type: "한우",
-  id: "1184 8871 2",
-  sex: "거세",
-  age: "70개월",
-  weight: "610kg",
-  pregnant: ""
-});
-
-function setDOM() {
-  document.body.innerHTML = '<div>'
-  + '<input id="price-calf-f-4~5month" value="2800000" />'
-  + '<input id="price-calf-m-4~5month" value="3391805" />'
-  + '<input id="price-calf-f-6~7month" value="3724590" />'
-  + '<input id="price-calf-m-6~7month" value="4440894" />'
-  + '<input id="price-cow-f" value="5535102" />'
-  + '<input id="price-cow-m" value="5546400" />'
-  + '<input id="discount-brucella" value="80" />'
-  + '<input id="discount-tuberculosis" value="100" />'
-  + '<input id="discount-footandmouth" value="80" />'
-  + '<select id="desease">'
-  + '  <option selected value="brucella"></option>'
-  + '  <option value="tuberculosis"></option>'
-  + '  <option value="footandmouth"></option>'
-  + '</select>'
-  + '<input id="standard-f" value="137.1" />'
-  + '<input id="standard-m" value="160.4" />'
-  + '</div>';
+/**
+ * price 객체를 산지일 평균가격 2020.6.5 기준으로 맞춥니다.
+ * @param {Price} price 
+ */
+function setTestPrice(price) {
+  price.priceCalfF4month = 2586000;
+  price.priceCalfM4month = 3589161;
+  price.priceCalfF6month = 3784502;
+  price.priceCalfM6month = 4943403;
+  price.priceCowF = 6053165;
+  price.priceCowM = 4864200;
+  price.priceCowC = 8153000;
+  return price;
 }
 
+const testCows = [
+  // 0
+  new Cow({
+    name: '소1',
+    type: '한우',
+    id: '1184 9626 4',
+    sex: '암',
+    age: '40',
+    weight: '643',
+    pregnant: ''
+  }),
+  // 1
+  new Cow({
+    name: '소2',
+    type: '한우',
+    id: '1184 9649 0',
+    sex: '암',
+    age: '38',
+    weight: '574',
+    pregnant: ''
+  }),
+  // 2
+  new Cow({
+    name: '소3',
+    type: '한우',
+    id: '1185 0060 7',
+    sex: '암',
+    age: '36',
+    weight: '498',
+    pregnant: '9'
+  }),
+  // 3
+  new Cow({
+    name: '소5',
+    type: '한우',
+    id: '1244 1620 4',
+    sex: '수',
+    age: '28',
+    weight: '633',
+    pregnant: ''
+  }),
+  // 4
+  new Cow({
+    name: '소12',
+    type: '한우',
+    id: '1393 2539 0',
+    sex: '암',
+    age: '12',
+    weight: '279',
+    pregnant: ''
+  }),
+  // 5
+  new Cow({
+    name: '소15',
+    type: '한우',
+    id: '1310 4539 8',
+    sex: '거세',
+    age: '25',
+    weight: '593',
+    pregnant: ''
+  }),
+  // 6
+  new Cow({
+    name: '소21',
+    type: '한우',
+    id: '0034 8136 2',
+    sex: '암',
+    age: '173',
+    weight: '632',
+    pregnant: ''
+  }),
+  // 7
+  new Cow({
+    name: '소89',
+    type: '한우',
+    id: '1471 6195 4',
+    sex: '수',
+    age: '1',
+    weight: '-',
+    pregnant: ''
+  }),
+  // 8
+  new Cow({
+    name: '소91',
+    type: '한우',
+    id: '1471 6197 9',
+    sex: '암',
+    age: '1',
+    weight: '-',
+    pregnant: ''
+  }),
+  // 9
+  new Cow({
+    name: '소93',
+    type: '한우',
+    id: '1503 3531 2',
+    sex: '거세',
+    age: '3',
+    weight: '-',
+    pregnant: ''
+  }),
+  // 10
+  new Cow({
+    name: '소95',
+    type: '한우',
+    id: '1503 3533 7',
+    sex: '수',
+    age: '2',
+    weight: '-',
+    pregnant: ''
+  })
+];
+
 test('renderBasic', () => {
-  const price = new Price();
+  const price = setTestPrice(new Price());
   
-  expect(price.renderBasic(cow1)).toBe('□ 소1 한우 1184 8871 2 임신2개월');
-  expect(price.renderBasic(cow2)).toBe('□ 소2 한우 1184 8871 2 암 27개월 550kg');
+  expect(price.renderBasic(testCows[0])).toBe('□ 소1 한우 1184 9626 4 암 40개월 643kg');
+  expect(price.renderBasic(testCows[1])).toBe('□ 소2 한우 1184 9649 0 암 38개월 574kg');
+  expect(price.renderBasic(testCows[2])).toBe('□ 소3 한우 1185 0060 7 암 36개월 498kg 임신9개월');
+  expect(price.renderBasic(testCows[3])).toBe('□ 소5 한우 1244 1620 4 수 28개월 633kg');
+  expect(price.renderBasic(testCows[4])).toBe('□ 소12 한우 1393 2539 0 암 12개월 279kg');
+  expect(price.renderBasic(testCows[5])).toBe('□ 소15 한우 1310 4539 8 거세 25개월 593kg');
+  expect(price.renderBasic(testCows[6])).toBe('□ 소21 한우 0034 8136 2 암 173개월 632kg');
+  expect(price.renderBasic(testCows[7])).toBe('□ 소89 한우 1471 6195 4 수 1개월');
+  expect(price.renderBasic(testCows[8])).toBe('□ 소91 한우 1471 6197 9 암 1개월');
+  expect(price.renderBasic(testCows[9])).toBe('□ 소93 한우 1503 3531 2 거세 3개월');
+  expect(price.renderBasic(testCows[10])).toBe('□ 소95 한우 1503 3533 7 수 2개월');
 });
 
-test('renderFetus', () => {
-  const price = new Price();
+test('renderCow', () => {
+  const price = setTestPrice(new Price());
 
-  setDOM();
-
-  expect(price.renderFetus(cow1))
-  .toBe('① 송아지 4-5개월령의 암,수 평균가격\n'
-    + '  (2,800,000 + 3,391,805) ÷ 2 = 3,095,902\n'
-    + '② 유사산 발생 당시 임신 개월수 (2개월)\n'
-    + '  ① × 2 ÷ 14.5 = 427,021\n'
-    + '③ 소 브루셀라병 양성우\n'
-    + '  ② × 80 ÷ 100 = 341,616\n');
-});
-
-test('renderCuff', () => {
-  const price = new Price();
-  const cow = new Cow({
-    name: "소4",
-    type: "한우",
-    id: "1184 8871 2",
-    sex: "수",
-    age: "5",
-    weight: "-",
-    pregnant: ""
-  });
-
-  setDOM();
-
-  expect(price.renderCuff(cow))
-  .toBe();
+  expect(price.renderCow(testCows[0])[1]).toBe(6486975);
+  expect(price.renderCow(testCows[1])[1]).toBe(5925739);
+  expect(price.renderCow(testCows[2])[1]).toBe(7469693);
+  expect(price.renderCow(testCows[3])[1]).toBe(5131731);
+  expect(price.renderCow(testCows[4])[1]).toBe(4479950);
+  expect(price.renderCow(testCows[5])[1]).toBe(8101891);
+  expect(price.renderCow(testCows[6])[1]).toBe(2550400);
+  expect(price.renderCow(testCows[7])[1]).toBe(2722811);
+  expect(price.renderCow(testCows[8])[1]).toBe(1961793);
+  expect(price.renderCow(testCows[9])[1]).toBe(3217868);
+  expect(price.renderCow(testCows[10])[1]).toBe(2970340);
 });

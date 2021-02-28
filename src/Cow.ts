@@ -1,3 +1,5 @@
+const numRegex = /[0-9]+/;
+
 export default class Cow {
   // 축종
   public name: string;
@@ -52,8 +54,12 @@ export default class Cow {
     // 태아의 경우 나이가 없다.
     if (!str || str === '-')
       return null;
-
-    return Number.parseInt(str.substring(0, str.length - 2));
+      
+    const result = str.match(numRegex);
+    if (!result)
+      return null;
+    else
+      return Number.parseInt(result[0]);
   }
 
   // 무게에서 kg을 떼고 숫자를 추출한다. 숫자가 없으면 null을 반환한다.
@@ -62,7 +68,7 @@ export default class Cow {
     if (!str || str === '-')
       return null;
 
-    const result = str.match(/\d+/);
+    const result = str.match(numRegex);
     if (!result)
       return null;
     else
@@ -74,7 +80,7 @@ export default class Cow {
     if (!str)
       return null;
     
-    const result = str.match(/\d+/);
+    const result = str.match(numRegex);
     if (!result)
       return null;
     else

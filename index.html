@@ -13,43 +13,31 @@
       <h2>산지일평균가격</h2>
       <div class="price-row">
         송아지-암 4-5개월령
-        <div><input type="number" id="price-calf-f-4~5month" value="2800000" min="0" step="1">원</div>
+        <div><input class="price-input" type="number" id="price-calf-f-4~5month" value="0" min="0" step="1">원</div>
       </div>
       <div class="price-row">
         송아지-수 4-5개월령
-        <div><input type="number" id="price-calf-m-4~5month" value="3391805" min="0" step="1">원</div>
+        <div><input class="price-input" type="number" id="price-calf-m-4~5month" value="0" min="0" step="1">원</div>
       </div>
       <div class="price-row">
         송아지-암 6-7개월령
-        <div><input type="number" id="price-calf-f-6~7month" value="3724590" min="0" step="1">원</div>
+        <div><input class="price-input" type="number" id="price-calf-f-6~7month" value="0" min="0" step="1">원</div>
       </div>
       <div class="price-row">
         송아지-수 6-7개월령
-        <div><input type="number" id="price-calf-m-6~7month" value="4440894" min="0" step="1">원</div>
+        <div><input class="price-input" type="number" id="price-calf-m-6~7month" value="0" min="0" step="1">원</div>
       </div>
       <div class="price-row">
         한우600kg-암
-        <div><input type="text" id="price-cow-f" value="5535102" min="0" step="1">원</div>
+        <div><input class="price-input" type="text" id="price-cow-f" value="0" min="0" step="1">원</div>
       </div>
       <div class="price-row">
         한우600kg-수
-        <div><input type="text" id="price-cow-m" value="5546400" min="0" step="1">원</div>
-      </div>
-    </section>
-
-    <section class="price">
-      <h2>살처분보상금 감액</h2>
-      <div class="price-row">
-        브루셀라
-        <div><input type="number" id="discount-brucella" max="100" min="0" value="80">%</div>
+        <div><input class="price-input" type="text" id="price-cow-m" value="0" min="0" step="1">원</div>
       </div>
       <div class="price-row">
-        결핵
-        <div><input type="number" id="discount-tuberculosis" max="100" min="0" value="100">%</div>
-      </div>
-      <div class="price-row">
-        구제역
-        <div><input type="number" id="discount-footandmouth" max="100" min="0" value="80">%</div>
+        한우600kg-거세우
+        <div><input class="price-input" type="text" id="price-cow-c" value="0" min="0" step="1">원</div>
       </div>
     </section>
 
@@ -57,38 +45,21 @@
       <h2>송아지 표준발육체중</h2>
       <div class="price-row">
         암송아지
-        <div><input type="number" id="standard-f" min="0" value="137.1">kg</div>
+        <div><input type="number" id="standard-f" min="0" value="137.1" readonly>kg</div>
       </div>
       <div class="price-row">
         숫송아지
-        <div><input type="number" id="standard-m" min="0" value="160.4">kg</div>
+        <div><input type="number" id="standard-m" min="0" value="160.4" readonly>kg</div>
       </div>
     </section>
 
     <section>
       <h2>가축평가액 계산기</h2>
-      <div>전염병 종류
-        <select id="desease">
-          <option selected value="brucella">브루셀라</option>
-          <option value="tuberculosis">결핵</option>
-          <option value="footandmouth">구제역</option>
-        </select>
-      </div>
       <textarea id="input" placeholder="가축평가액 표를 전체 복사하여 붙여넣으세요."></textarea>
       <textarea id="output" readonly></textarea>
-    </section>
+      <textarea id="price-output" readonly></textarea>
 
-    <section>
-      <h2>가축전염병예방법 시행령</h2>
-      <h3>보상금의 지급기준(제11조제1항 관련)</h3>
-      <p>1. 법 제 28조제1항에 따라 보상금은 다음 각 목의 범위에서 지급한다.<br>
-      가. 생략<br>
-      나. 생략<br>
-      다. <strong><u>법 제20조제1항 및 같은 조 제2항 본문(법 제28조에서 준용하는 경우를 포함한다. 이하 이 표에서 같다)
-        에 따라 가축을 살처분한 경우 중 다음의 어느 하나에 해당하는 경우: 
-        살처분 당시의 살처분한 가축평가액(이하 "가축평가액"이라 한다)의 전액</u></strong>
-        , 다만, 병성감정 결과 브루셀라병(소에만 해당한다)ㆍ돼지열병ㆍ구제역ㆍ고병원성조류인플루엔자 감염축이 발견된 
-        농가에 대해서는 살처분일을 기준으로 가축평가액의 100분의 80에 해당하는 금액으로 하며, (이하생략)</p>
+      <br><input id="calculate-button" type="button" value="계산" />
     </section>
 
     <!-- 스크립트 -->
