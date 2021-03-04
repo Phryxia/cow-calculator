@@ -229,6 +229,7 @@ export default class Price {
 
     out += `${Util.getMarker(marker)} 한우 거세우 ${cow.weight}kg (600kg 이하)\n`;
     out += `  = ${this.priceCalfM6month} + (${cow.weight} - ${this.stdCuffWeightM}) × (${this.priceCowC} - ${this.priceCalfM6month}) ÷ (600 - ${this.stdCuffWeightM})\n`;
+    out += `  = ${Util.format(nextPrice)}\n`;
 
     return [out, nextPrice, marker + 1];
   }
@@ -247,6 +248,7 @@ export default class Price {
 
     out += `${Util.getMarker(marker)} 한우 거세우 ${cow.weight}kg (600kg 초과)\n`;
     out += `  = ${this.priceCowC} + (${cow.weight} - 600) × ${this.priceCowC} ÷ 600\n`;
+    out += `  = ${Util.format(nextPrice)}\n`;
 
     return [out, nextPrice, marker + 1];
   }
