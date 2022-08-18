@@ -1,26 +1,19 @@
-const numRegex = /[0-9]+/;
+const numRegex = /[0-9]+/
 
-export default class Cow {
-  // 축종
-  public name: string;
+export enum CowSex {
+  Male = '수',
+  Female = '암',
+  Castrated = '거세',
+}
 
-  // 품종
-  public type: string;
-
-  // 개체번호
-  public id: string;
-
-  // 성별
-  public sex: "암" | "수" | "거세" | null;
-
-  // 연령 (단위: 개월)
-  public age: number | null;
-
-  // 생체량 (주의: 송아지는 생체량이 null임)
-  public weight: number | null;
-
-  // 임신 여부
-  public pregnant: number | null;
+export class Cow {
+  name: string // 축종
+  type: string // 품종
+  id: string // 개체번호
+  sex?: CowSex // 성별 (태아는 성별 없음)
+  age?: number // 연령 (단위: 개월, 태아는 연령 없음)
+  weight?: number // 생체량 (송아지는 생체량 없음)
+  pregnancy?: number // 임신 개월 수, 유사산 태아인 경우 반드시 존재 (부모의 임신 개월 수)
 
   /**
    * 사용자 입력에서 받은 걸 그대로 넣어주기만 하면 된다.
@@ -31,59 +24,50 @@ export default class Cow {
    *  sex: "암",
    *  age: "43개월",
    *  weight: "441kg",
-   *  pregnant: "임신3개월"
+   *  pregnancy: "임신3개월"
    * }
-   * @param args 
+   * @param args
    */
   public constructor(args: any) {
-    this.name = args.name;
-    this.type = args.type;
-    this.id = args.id;
-    this.sex = Cow.parseSex(args.sex) as '암' | '수' | '거세' | null;
-    this.age = Cow.parseAge(args.age);
-    this.weight = Cow.parseWeight(args.weight);
-    this.pregnant = Cow.parsePregnant(args.pregnant);
+    this.name = args.name
+    this.type = args.type
+    this.id = args.id
+    this.sex = parseSex(args.sex)
+    this.age = parseAge(args.age)
+    this.weight = parseWeight(args.weight)
+    this.pregnancy = parsePregnancy(args.pregnancy)
   }
+}
 
-  private static parseSex(str: string): string | null {
-    return str === '-' ? null : str;
+function parseSex(str: string): CowSex | undefined {
+  return str === '-' ? undefined : (str as CowSex)
+}
+
+// xx개월에서 숫자를 추출한다.
+function parseAge(str: string): number | undefined {
+  // 태아의 경우 나이가 없다.
+  const result = str.match(numRegex)
+  if (!result) {
+    return undefined
   }
+  return Number.parseInt(result[0])
+}
 
-  // xx개월에서 숫자를 추출한다.
-  private static parseAge(str: string): number | null {
-    // 태아의 경우 나이가 없다.
-    if (!str || str === '-')
-      return null;
-      
-    const result = str.match(numRegex);
-    if (!result)
-      return null;
-    else
-      return Number.parseInt(result[0]);
+// 무게에서 kg을 떼고 숫자를 추출한다. 숫자가 없으면 undefined을 반환한다.
+function parseWeight(str: string): number | undefined {
+  // 송아지의 경우 생체량이 없다.
+  const result = str.match(numRegex)
+  if (!result) {
+    return undefined
   }
+  return Number.parseInt(result[0])
+}
 
-  // 무게에서 kg을 떼고 숫자를 추출한다. 숫자가 없으면 null을 반환한다.
-  private static parseWeight(str: string): number | null {
-    // 송아지의 경우 생체량이 없다.
-    if (!str || str === '-')
-      return null;
-
-    const result = str.match(numRegex);
-    if (!result)
-      return null;
-    else
-      return Number.parseInt(result[0]); 
+// 임신x개월에서 숫자만 추출한다. 숫자가 없으면 undefined을 반환한다.
+function parsePregnancy(str: string): number | undefined {
+  const result = str.match(numRegex)
+  if (!result) {
+    return undefined
   }
-
-  // 임신x개월에서 숫자만 추출한다. 숫자가 없으면 null을 반환한다.
-  private static parsePregnant(str: string): number | null {
-    if (!str)
-      return null;
-    
-    const result = str.match(numRegex);
-    if (!result)
-      return null;
-    else
-      return Number.parseInt(result[0]); 
-  }
-};
+  return Number.parseInt(result[0])
+}

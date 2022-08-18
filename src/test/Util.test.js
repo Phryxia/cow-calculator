@@ -1,39 +1,39 @@
-import Util from '../Util';
+import { formatPrice, padZero, getMarker } from '../utils'
 
 /*
-  Util.format
+  formatPrice
 */
-test('Util.format', () => {
-  expect(Util.format(0)).toBe('0');
-  expect(Util.format(1)).toBe('1');
-  expect(Util.format(11)).toBe('11');
-  expect(Util.format(111)).toBe('111');
-  expect(Util.format(1111)).toBe('1,111');
-  expect(Util.format(11111)).toBe('11,111');
-  expect(Util.format(111111)).toBe('111,111');
-  expect(Util.format(1111111)).toBe('1,111,111');
-  expect(Util.format(1000)).toBe('1,000');
-  expect(Util.format(1001)).toBe('1,001');
-  expect(Util.format(1010)).toBe('1,010');
-});
+test('formatPrice', () => {
+  expect(formatPrice(0)).toBe('0')
+  expect(formatPrice(1)).toBe('1')
+  expect(formatPrice(11)).toBe('11')
+  expect(formatPrice(111)).toBe('111')
+  expect(formatPrice(1111)).toBe('1,111')
+  expect(formatPrice(11111)).toBe('11,111')
+  expect(formatPrice(111111)).toBe('111,111')
+  expect(formatPrice(1111111)).toBe('1,111,111')
+  expect(formatPrice(1000)).toBe('1,000')
+  expect(formatPrice(1001)).toBe('1,001')
+  expect(formatPrice(1010)).toBe('1,010')
+})
 
 /*
   Util.padZero
 */
 test('Util.padZero', () => {
-  expect(Util.padZero(0)).toBe('000');
-  expect(Util.padZero(1)).toBe('001');
-  expect(Util.padZero(11)).toBe('011');
-  expect(Util.padZero(111)).toBe('111');
-});
+  expect(padZero(0)).toBe('000')
+  expect(padZero(1)).toBe('001')
+  expect(padZero(11)).toBe('011')
+  expect(padZero(111)).toBe('111')
+})
 
 /*
-  Util.getMarker
+  getMarker
 */
-test('Util.getMarker', () => {
-  expect(Util.getMarker(1)).toBe('①');
-  expect(Util.getMarker(2)).toBe('②');
-  expect(Util.getMarker(3)).toBe('③');
-  expect(Util.getMarker(4)).toBe('④');
-  expect(Util.getMarker(5)).toBe('⑤');
-});
+test('getMarker', () => {
+  expect(getMarker(1)).toBe('①')
+  expect(getMarker(2)).toBe('②')
+  expect(getMarker(3)).toBe('③')
+  expect(getMarker(4)).toBe('④')
+  expect(getMarker(5)).toBe('⑤')
+})
