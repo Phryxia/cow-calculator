@@ -35,9 +35,6 @@ test('Cow 2', () => {
     name: '소1',
     type: '한우',
     id: '1184 8871 2',
-    sex: null,
-    age: null,
-    weight: null,
     pregnancy: 2,
   })
 })
@@ -58,7 +55,5 @@ test('Cow 3', () => {
     id: '1184 8871 2',
     sex: '거세',
     age: 1,
-    weight: null,
-    pregnancy: null,
   })
 })
