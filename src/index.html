@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <title>한우 보상금 산출내역 계산기 ver 1.1.0</title>
+  </head>
+  <body>
+    <div class="root">
+      <section class="header section">
+        <div>
+          <h1>한우 보상금 산출내역 계산기</h1>
+          <em>ver 1.1.0</em>
+        </div>
+      </section>
+
+      <section class="price section">
+        <h2>산지일평균가격</h2>
+        <p>
+          농협 축산정보센터
+          <a href="https://livestock.nonghyup.com/frdist/price3List.do"
+            >산지 일평균 가격</a
+          >을 확인하여, 아래에 기록해주세요.
+        </p>
+        <div class="price-row">
+          송아지-암 4-5개월령
+          <div>
+            <input
+              class="price-input"
+              type="number"
+              id="price-calf-f-4~5month"
+              min="0"
+              step="1"
+            />원
+          </div>
+        </div>
+        <div class="price-row">
+          송아지-수 4-5개월령
+          <div>
+            <input
+              class="price-input"
+              type="number"
+              id="price-calf-m-4~5month"
+              min="0"
+              step="1"
+            />원
+          </div>
+        </div>
+        <div class="price-row">
+          송아지-암 6-7개월령
+          <div>
+            <input
+              class="price-input"
+              type="number"
+              id="price-calf-f-6~7month"
+              min="0"
+              step="1"
+            />원
+          </div>
+        </div>
+        <div class="price-row">
+          송아지-수 6-7개월령
+          <div>
+            <input
+              class="price-input"
+              type="number"
+              id="price-calf-m-6~7month"
+              min="0"
+              step="1"
+            />원
+          </div>
+        </div>
+        <div class="price-row">
+          한우600kg-암
+          <div>
+            <input
+              class="price-input"
+              type="number"
+              id="price-cow-f"
+              min="0"
+              step="1"
+            />원
+          </div>
+        </div>
+        <div class="price-row">
+          한우600kg-수
+          <div>
+            <input
+              class="price-input"
+              type="number"
+              id="price-cow-m"
+              min="0"
+              step="1"
+            />원
+          </div>
+        </div>
+        <div class="price-row">
+          한우600kg-거세우
+          <div>
+            <input
+              class="price-input"
+              type="number"
+              id="price-cow-c"
+              min="0"
+              step="1"
+            />원
+          </div>
+        </div>
+      </section>
+
+      <section class="price section">
+        <h2>송아지 표준발육체중</h2>
+        <div class="price-row">
+          암송아지
+          <div>
+            <input type="number" id="standard-f" min="0" value="137.1" />kg
+          </div>
+        </div>
+        <div class="price-row">
+          숫송아지
+          <div>
+            <input type="number" id="standard-m" min="0" value="160.4" />kg
+          </div>
+        </div>
+      </section>
+
+      <section class="section">
+        <h2>가축평가액 계산기</h2>
+        <p>모든 계산 과정에서 소숫점 이하는 절삭합니다.</p>
+        <textarea
+          id="input"
+          placeholder="가축평가액 엑셀 표를 복사하여 여기에 붙여넣으면, 수식을 출력합니다."
+        ></textarea>
+        <textarea
+          id="output"
+          placeholder="계산식 결과가 나오면 클릭하여 복사하세요."
+          readonly
+        ></textarea>
+        <textarea
+          id="price-output"
+          placeholder="최종 가격 결과가 나오면 클릭하여 복사하세요."
+          readonly
+        ></textarea>
+      </section>
+
+      <footer class="section">
+        <p>
+          이 서비스는 민간에서 개발한 비공식 프로그램으로 정부와는 관련이
+          없습니다.<br />
+          제목 폰트는
+          <a href="https://noonnu.cc/font_page/943">밀양해맑은상상체</a>, 내용
+          폰트는
+          <a href="https://noonnu.cc/font_page/941">밀양아리랑고딕체</a>를
+          사용하였습니다.<br />문의:
+          <a href="mailto:xahhaepica@gmail.com">xahhaepica@gmail.com</a>
+        </p>
+        <a href="https://github.com/Phryxia/cow-calculator" target="_blank">
+          <img src="/public/GitHub-Mark-64px.png" />
+        </a>
+      </footer>
+    </div>
+  </body>
+</html>

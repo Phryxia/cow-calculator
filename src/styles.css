@@ -1,0 +1,143 @@
+@font-face {
+  font-family: 'MYHaemalgeunSangsang';
+  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2206-02@1.0/MYHaemalgeunSangsang.woff2')
+    format('woff2');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'MYArirang_gothic';
+  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2206-02@1.0/MYArirang_gothic.woff2')
+    format('woff2');
+  font-weight: normal;
+  font-style: normal;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+a,
+a:visited {
+  text-decoration: none;
+  color: #e83817;
+}
+
+a:hover {
+  color: #fe6c6b;
+}
+
+body {
+  font-family: MYArirang_gothic;
+  font-size: 15px;
+  background: #222222;
+  color: #222222;
+}
+
+.root {
+  width: 600px;
+  translate: calc((100vw - 600px) / 2);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: #f8f8f8;
+  padding: 0 5px;
+}
+
+.root > * {
+  width: 100%;
+}
+
+.root > *:not(:last-child) {
+  margin-top: 5px;
+  margin-bottom: 20px;
+}
+
+.root > *:last-child {
+  margin-bottom: 5px;
+}
+
+.header {
+  display: flex;
+  flex-direction: column;
+  text-align: end;
+  align-items: center;
+}
+
+.header h1 {
+  font-family: MYHaemalgeunSangsang;
+  font-size: 36px;
+  width: auto;
+}
+
+.header em {
+  padding-right: 5px;
+  font-style: normal;
+}
+
+.section {
+  padding: 13px;
+  background: #fdfdfd;
+  box-shadow: 0px 0px 5px 2px #00000040;
+}
+
+.section > h2 {
+  margin-bottom: 15px;
+}
+
+.section > p {
+  margin: 15px 0;
+}
+
+.price input {
+  font-size: 12px;
+  width: 74px;
+  height: 1.6em;
+  margin-right: 0.5em;
+  margin-bottom: 1px;
+  padding: 2px 5px;
+  border: none;
+  box-shadow: inset 0px 0px 5px -3px black;
+}
+
+.price-row {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  width: 250px;
+}
+
+textarea {
+  width: 100%;
+  height: 180px;
+  display: block;
+  margin-bottom: 10px;
+  padding: 8px;
+  border: none;
+  box-shadow: inset 0px 0px 5px -3px black;
+  resize: vertical;
+}
+
+textarea:read-only {
+  background: #f6f6f6;
+}
+
+footer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+footer p {
+  font-size: 12px;
+  text-align: center;
+}
+
+footer img {
+  width: 32px;
+  height: 32px;
+}
