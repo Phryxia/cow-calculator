@@ -221,32 +221,6 @@ export default class Price {
     return [out, nextPrice]
   }
 
-  /**
-   * 거세우 관련 렌더.
-   * 반환을 [렌더된 문자열, 누적된 값, 누적된 마커번호]로 한다.
-   * @param prevPrice 이전까지 누적해온 가격
-   * @param marker 이전까지 세어온 마커 번호
-   */
-  private renderCastration(
-    prevPrice: number,
-    marker: number,
-  ): [string, number, number] {
-    let out = ''
-    const nextPrice = Math.floor(prevPrice * 1.2)
-
-    out += `${getMarker(marker)} 거세우\n`
-    out += `  ${getMarker(marker - 1)} × 1.2 = ${formatPrice(nextPrice)}\n`
-
-    return [out, nextPrice, marker + 1]
-  }
-
-  /**
-   * 무게가 600kg 이하인 거세우의 가격을 계산
-   * [렌더된 문자열, 가격, 마커번호]를 반환한다.
-   * @param prevPrice 안쓰는 값
-   * @param marker
-   * @param cow
-   */
   private renderUnder600Castrated(
     marker: number,
     cow: Cow,
@@ -269,13 +243,6 @@ export default class Price {
     return [out, nextPrice, marker + 1]
   }
 
-  /**
-   * 무게가 600kg 초과인 거세우의 가격을 계산
-   * [렌더된 문자열, 가격, 마커번호]를 반환한다.
-   * @param prevPrice 안쓰는 값
-   * @param marker
-   * @param cow
-   */
   private renderOver600Castrated(
     marker: number,
     cow: Cow,
@@ -294,12 +261,6 @@ export default class Price {
     return [out, nextPrice, marker + 1]
   }
 
-  /**
-   * 무게가 600kg 이하인 소의 베이스 가격을 계산
-   * @param prevPrice 안쓰는 값
-   * @param marker
-   * @param cow
-   */
   private renderUnder600(marker: number, cow: Cow): [string, number, number] {
     if (!cow.weight) throw new Error('생체량이 누락되었습니다.')
 
@@ -327,12 +288,6 @@ export default class Price {
     return [out, nextPrice, marker + 1]
   }
 
-  /**
-   * 무게가 600kg 초과인 소의 베이스 가격을 계산
-   * @param prevPrice 안쓰는 값
-   * @param marker
-   * @param cow
-   */
   private renderOver600(marker: number, cow: Cow): [string, number, number] {
     if (!cow.weight) throw new Error('생체량이 누락되었습니다.')
 
@@ -353,12 +308,7 @@ export default class Price {
     return [out, nextPrice, marker + 1]
   }
 
-  /**
-   * 월령에 따른 평가액 상한선 조정 렌더
-   * @param prevPrice
-   * @param marker
-   * @param cow
-   */
+  // 월령에 따른 평가액 상한선 조정 (24개월령)
   private renderOldCow(
     prevPrice: number,
     marker: number,
@@ -386,12 +336,7 @@ export default class Price {
     return [out, nextPrice, marker + 1]
   }
 
-  /**
-   * 임신우 계산
-   * @param prevPrice
-   * @param marker
-   * @param cow
-   */
+  // 임신우
   private renderpregnancy(
     prevPrice: number,
     marker: number,
