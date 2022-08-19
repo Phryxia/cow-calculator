@@ -33,8 +33,9 @@ export default class Price {
   public stdCuffWeightM: number = 160.4
 
   /**
-   * 주어진 소를 분석하여 렌더한다.
-   * @param cow
+   *
+   * @param cow 소
+   * @returns [결과, 가격]
    */
   public renderCow(cow: Cow): [string, number] {
     let out = this.renderBasic(cow)
