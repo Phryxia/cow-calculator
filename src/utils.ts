@@ -32,3 +32,7 @@ const markers = ['①', '②', '③', '④', '⑤', '⑥', '⑦', '⑧', '⑨', 
 export function getMarker(x: number): string {
   return markers[x - 1]
 }
+
+export function copyToClipboard(s: string): void {
+  navigator.clipboard.writeText(s)
+}

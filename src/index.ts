@@ -1,6 +1,7 @@
 import { Cow } from './Cow'
 import { price } from './dom/configuration'
 import './styles.css'
+import { copyToClipboard } from './utils'
 
 const $input = document.querySelector('#input') as HTMLTextAreaElement
 const $output = document.querySelector('#output') as HTMLTextAreaElement
@@ -90,3 +91,13 @@ function renderFinalOutcomes(prices: number[]): void {
     $priceOutput.value += price + '\n'
   }
 }
+
+$output.addEventListener('click', () => {
+  copyToClipboard($output.value)
+  alert('계산식이 복사되었습니다.')
+})
+
+$priceOutput.addEventListener('click', () => {
+  copyToClipboard($priceOutput.value)
+  alert('최종 가격이 복사되었습니다.')
+})
