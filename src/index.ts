@@ -7,14 +7,15 @@ const $output = document.querySelector('#output') as HTMLTextAreaElement
 const $priceOutput = document.querySelector(
   '#price-output',
 ) as HTMLTextAreaElement
-const $button = document.querySelector('#calculate-button') as HTMLInputElement
 
-$button.onclick = () => {
+function calculate() {
   // 안전 장치
   if (isNotCompleted()) {
     alert('모든 산지일평균가격을 제대로 입력해주세요.')
     return
   }
+
+  if (!$input.value) return
 
   // 계산하기
   const cows = parseCows()
@@ -26,6 +27,7 @@ $button.onclick = () => {
   renderFinalOutcomes(renderedCalculations)
 }
 
+$input.addEventListener('change', calculate)
 function isNotCompleted(): boolean {
   const doms = document.querySelectorAll('.price-input')
   let warn = false

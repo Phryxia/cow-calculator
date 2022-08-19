@@ -29,4 +29,11 @@ module.exports = {
       template: './src/index.html',
     }),
   ],
+  devServer: {
+    static: {
+      publicPath: '/public',
+      directory: path.join(__dirname, 'public'),
+    },
+    open: true,
+  },
 }
