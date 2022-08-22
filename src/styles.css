@@ -164,3 +164,7 @@ footer img {
   transition: opacity 10ms;
   opacity: 0.9;
 }
+
+.red {
+  background: #e83817;
+}
