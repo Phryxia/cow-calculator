@@ -141,3 +141,30 @@ footer img {
   width: 32px;
   height: 32px;
 }
+
+.modal {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  left: calc(50% - 160px);
+  bottom: 80px;
+  z-index: 2;
+
+  width: 320px;
+  height: 60px;
+  background: white;
+  color: black;
+  opacity: 0;
+  transition: opacity 3s cubic-bezier(0.7, 0, 0.84, 0);
+  box-shadow: 0px 0px 5px 2px #00000040;
+}
+
+.open {
+  transition: opacity 10ms;
+  opacity: 0.9;
+}
+
+.red {
+  background: #e83817;
+}

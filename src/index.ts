@@ -1,8 +1,9 @@
+import ClipboardJS from '../node_modules/clipboard/src/clipboard'
 import { Cow } from './Cow'
-import { price } from './dom/configuration'
+import { price, addConfigChangeHandler } from './dom/configuration'
+import { openToast } from './dom/modal'
 import { renderCow } from './Price'
 import './styles.css'
-import { copyToClipboard } from './utils'
 
 const $input = document.querySelector('#input') as HTMLTextAreaElement
 const $output = document.querySelector('#output') as HTMLTextAreaElement
@@ -10,10 +11,12 @@ const $priceOutput = document.querySelector(
   '#price-output',
 ) as HTMLTextAreaElement
 
-function calculate() {
+function calculate(showToast: boolean) {
   // 안전 장치
   if (isNotCompleted()) {
-    alert('모든 산지일평균가격을 제대로 입력해주세요.')
+    if (showToast) {
+      openToast('모든 산지일평균가격을 제대로 입력해주세요.', true)
+    }
     return
   }
 
@@ -29,18 +32,11 @@ function calculate() {
   renderFinalOutcomes(renderedCalculations)
 }
 
-$input.addEventListener('change', calculate)
+addConfigChangeHandler(() => calculate(false))
+$input.addEventListener('change', () => calculate(true))
+
 function isNotCompleted(): boolean {
-  const doms = document.querySelectorAll('.price-input')
-  let warn = false
-
-  // 하나라도 가격이 0이거나 숫자가 아니면
-  for (const $dom of doms) {
-    const $temp = $dom as HTMLInputElement
-    warn ||= $temp.value === '0' || isNaN(parseInt($temp.value))
-  }
-
-  return warn
+  return !Object.values(price).every(Boolean)
 }
 
 function parseCows(): Cow[] {
@@ -94,12 +90,9 @@ function renderFinalOutcomes(prices: number[]): void {
   }
 }
 
-$output.addEventListener('click', () => {
-  copyToClipboard($output.value)
-  alert('계산식이 복사되었습니다.')
-})
+const clipboard = new ClipboardJS('.copy-to-click')
 
-$priceOutput.addEventListener('click', () => {
-  copyToClipboard($priceOutput.value)
-  alert('최종 가격이 복사되었습니다.')
+clipboard.on('success', (e) => {
+  const target = e.trigger.id === 'output' ? '계산식' : '최종가격'
+  openToast(`${target}을 클립보드에 복사하였습니다.`)
 })

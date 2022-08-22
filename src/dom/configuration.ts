@@ -23,6 +23,9 @@ const $config: Record<string, HTMLInputElement> = {
   stdCuffWeightM: document.getElementById('standard-m')! as HTMLInputElement,
 }
 
+type ConfigChangeHandler = (config: Price) => void
+const eventHandler = [] as ConfigChangeHandler[]
+
 for (const key in $config) {
   const dom = $config[key]
 
@@ -37,9 +40,16 @@ for (const key in $config) {
       // @ts-ignore
       price[key] = newValue
       savePrice(price)
+      eventHandler.forEach((handler) => handler(price))
     }
   })
 
   // 부팅 시 초기화
   dom.value = price[key as keyof Price].toString()
+}
+
+export function addConfigChangeHandler(callback: ConfigChangeHandler): void {
+  if (!eventHandler.includes(callback)) {
+    eventHandler.push(callback)
+  }
 }
