@@ -3,7 +3,6 @@ import { Cow } from './Cow'
 import { price, addConfigChangeHandler } from './dom/configuration'
 import { openToast } from './dom/modal'
 import { renderCow } from './Price'
-import './styles.css'
 
 const $input = document.querySelector('#input') as HTMLTextAreaElement
 const $output = document.querySelector('#output') as HTMLTextAreaElement
