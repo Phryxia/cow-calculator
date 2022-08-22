@@ -1,4 +1,4 @@
-import Price from '../Price'
+import { Price } from '../Price'
 import { loadPrice, savePrice } from '../storage'
 
 export const price: Price = loadPrice()
@@ -27,18 +27,19 @@ for (const key in $config) {
   const dom = $config[key]
 
   dom.addEventListener('change', () => {
-    const prevValue = price[key] as number
+    const prevValue = price[key as keyof Price] as number
     const newValue = parseFloat(dom.value)
 
     if (Number.isNaN(newValue)) {
       dom.value = prevValue.toString()
     } else {
       dom.value = newValue.toString()
+      // @ts-ignore
       price[key] = newValue
       savePrice(price)
     }
   })
 
   // 부팅 시 초기화
-  dom.value = price[key].toString()
+  dom.value = price[key as keyof Price].toString()
 }

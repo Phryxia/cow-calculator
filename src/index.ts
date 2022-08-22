@@ -1,5 +1,6 @@
 import { Cow } from './Cow'
 import { price } from './dom/configuration'
+import { renderCow } from './Price'
 import './styles.css'
 import { copyToClipboard } from './utils'
 
@@ -45,7 +46,7 @@ function isNotCompleted(): boolean {
 function parseCows(): Cow[] {
   const cows = [] as Cow[]
 
-  const contents = $input.value.trim()
+  const contents = $input.value.trimLeft()
   const lines = contents.split('\n')
 
   // 입력 양식에서
@@ -67,6 +68,7 @@ function parseCows(): Cow[] {
       cows.push(cow)
     } catch (e) {
       console.warn(e)
+      console.warn(`at line number ${lineNum}`)
     }
   }
 
@@ -77,7 +79,7 @@ function renderCalculationProcess(cows: Cow[]): number[] {
   const prices = [] as number[]
   $output.value = ''
   for (const cow of cows) {
-    const [sentence, value] = price.renderCow(cow)
+    const [sentence, value] = renderCow(cow, price)
     $output.value += sentence + '\n'
 
     prices.push(value)

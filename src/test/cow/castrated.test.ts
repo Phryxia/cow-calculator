@@ -1,5 +1,5 @@
 import { Cow, CowSex } from '../../Cow'
-import Price from '../../Price'
+import { Price, renderCow } from '../../Price'
 
 function getPrice(cow: Cow, price: Price): number {
   if (!cow.weight) return 0
@@ -15,9 +15,17 @@ function getPrice(cow: Cow, price: Price): number {
 }
 
 describe('거세우 2020.6.2 - 거세우 600kg 이상', () => {
-  const price = new Price()
-  price.priceCalfM6month = 5013466
-  price.priceCowC = 8688000
+  const price = {
+    priceCalfF4month: 2586000,
+    priceCalfM4month: 3589161,
+    priceCalfF6month: 3784502,
+    priceCalfM6month: 5013466,
+    priceCowF: 6053165,
+    priceCowM: 4864200,
+    priceCowC: 8688000,
+    stdCuffWeightF: 137.1,
+    stdCuffWeightM: 160.4,
+  }
 
   const cows: Cow[] = [
     {
@@ -64,16 +72,24 @@ describe('거세우 2020.6.2 - 거세우 600kg 이상', () => {
 
   for (const cow of cows) {
     test(`거세우 ${cow.id}번 검증`, () => {
-      const [, result] = price.renderCow(cow)
+      const [, result] = renderCow(cow, price)
       expect(result).toBeCloseTo(getPrice(cow, price), -1)
     })
   }
 })
 
 describe('거세우 2020.6.5 - 거세우 600kg 미만', () => {
-  const price = new Price()
-  price.priceCalfM6month = 4943403
-  price.priceCowC = 8153000
+  const price = {
+    priceCalfF4month: 2586000,
+    priceCalfM4month: 3589161,
+    priceCalfF6month: 3784502,
+    priceCalfM6month: 4943403,
+    priceCowF: 6053165,
+    priceCowM: 4864200,
+    priceCowC: 8153000,
+    stdCuffWeightF: 137.1,
+    stdCuffWeightM: 160.4,
+  }
 
   const cows: Cow[] = [
     {
@@ -120,7 +136,7 @@ describe('거세우 2020.6.5 - 거세우 600kg 미만', () => {
 
   for (const cow of cows) {
     test(`거세우 ${cow.id}번 검증`, () => {
-      const [, result] = price.renderCow(cow)
+      const [, result] = renderCow(cow, price)
       expect(result).toBeCloseTo(getPrice(cow, price), -1)
     })
   }
