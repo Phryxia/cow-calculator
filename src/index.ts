@@ -1,8 +1,9 @@
+import ClipboardJS from '../node_modules/clipboard/src/clipboard'
 import { Cow } from './Cow'
 import { price } from './dom/configuration'
+import { openToast } from './dom/modal'
 import { renderCow } from './Price'
 import './styles.css'
-import { copyToClipboard } from './utils'
 
 const $input = document.querySelector('#input') as HTMLTextAreaElement
 const $output = document.querySelector('#output') as HTMLTextAreaElement
@@ -94,12 +95,9 @@ function renderFinalOutcomes(prices: number[]): void {
   }
 }
 
-$output.addEventListener('click', () => {
-  copyToClipboard($output.value)
-  alert('계산식이 복사되었습니다.')
-})
+const clipboard = new ClipboardJS('.copy-to-click')
 
-$priceOutput.addEventListener('click', () => {
-  copyToClipboard($priceOutput.value)
-  alert('최종 가격이 복사되었습니다.')
+clipboard.on('success', (e) => {
+  const target = e.trigger.id === 'output' ? '계산식' : '최종가격'
+  openToast(`${target}을 클립보드에 복사하였습니다.`)
 })
